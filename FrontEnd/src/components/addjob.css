@@ -1,0 +1,227 @@
+
+
+
+
+
+
+
+
+  
+
+  .centered-container {
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 9%;
+    margin-bottom: 70px;
+
+    
+    
+  }
+  
+  .rounded-border {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 3%; 
+    width :40%
+  }
+  
+  
+  .form-title {
+    font-size: 24px; 
+    color: black;
+    text-align: center;
+  }
+  
+  .label {
+    font-size: 18px; 
+    text-align: left;
+  }
+  
+ 
+  
+  .centered-submit-btn {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submit-btn {
+    background-color: #F0B555;
+    color:black;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; 
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+  
+    margin-top: 2%;
+  }
+
+
+
+  
+
+  .input1{        /*  For Appl */
+    height: 1%;
+    width:60%;
+    padding: 4%;
+    margin:7%;
+    border-radius: 5px;
+   
+  } 
+
+  
+  
+  .input2{
+    height: 10px;
+    width:300px;
+    padding: 20px;
+    margin:30px;
+    border-radius: 5px;
+   
+  }
+  .input3{
+    height: 10px;
+    width:250px;
+    padding: 50px;
+    margin:25px;
+    border-radius: 5px;
+   
+  }
+  .par{
+    color : grey;
+    text-align: center;
+    
+  }
+
+
+  .p2{
+    color : grey;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .resumeinput{
+
+    height: 10px;
+    width:45%;
+    padding: 4%;
+    margin:4%;
+    border-radius: 5px;
+  }
+
+  body {
+    overflow-y: scroll; 
+  }
+
+
+
+  .radio-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 10px; 
+    margin-bottom: 30px;
+
+  }
+  
+  .radio-input {
+    margin-right: 20px; 
+   
+  }
+
+  .radio-input2{
+    margin-left: 30px;
+  }
+
+
+
+  @media (max-width: 1206px ) {
+
+    .rounded-border {
+
+      width: 50%;
+    }
+
+    .input1{
+      width:62%;
+      
+    }
+
+    .resumeinput{
+      width: 48%;
+    }
+
+  }
+
+  @media (max-width: 1000px ) {
+
+
+    .rounded-border {
+
+      width: 60%;
+    }
+
+    .input1{
+      width:60%;
+      margin:5%;
+
+    }
+
+    .resumeinput{
+      width: 38%;
+    }
+
+    .label {
+      font-size: 15px; 
+      text-align: left;
+    }
+
+    .submit-btn{
+
+      padding: 12px 20px; 
+      font-size: 14px;
+    }
+
+  }
+
+
+
+  @media (max-width: 500px ) {
+
+
+    .rounded-border {
+
+
+
+      margin-top: 7%;
+      width: 70%;
+      height: 70%;
+    }
+
+    .input1{
+      width:60%;
+      margin:5%;
+
+    }
+
+    .resumeinput{
+      width: 38%;
+    }
+
+    .label {
+      font-size: 15px; 
+      text-align: left;
+    }
+
+    .submit-btn{
+
+      padding: 12px 20px; 
+      font-size: 14px;
+    }
+
+  }

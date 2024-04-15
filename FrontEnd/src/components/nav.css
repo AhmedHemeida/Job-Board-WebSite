@@ -1,0 +1,128 @@
+
+body{
+    background-color: #151C48;
+}
+.nav {
+    text-align: right;
+    margin-bottom: 5%;
+  }
+  
+
+  
+  .nav-item {
+    display: inline-block;
+    margin-right: 1.5%;
+    padding: .9% 1.5%;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    color: 'black';
+    font-weight: bold;
+   
+  }
+
+
+
+@media (max-width: 1000px)  and (max-height: 1500px){
+  .nav-item {
+    margin-right: 3%;
+
+    padding: 2% 2%;
+    font-size: 11px;
+    top: -1%;
+
+  }
+
+}
+  
+ 
+  
+  .red-button {
+    background-color: #F0B555;
+    color: black;
+  }
+  
+
+  .logo {
+    position:absolute;
+    top: 2%; 
+    left: 2%; 
+    height: 12px; 
+    width: 12px; 
+    color: white;
+  }
+
+
+
+
+  
+
+  .prof2{
+   
+    /* person and name  */ 
+
+
+    color: #ffffff;
+  
+    display: inline-block;
+    cursor: pointer;
+
+    position:absolute;
+    left:6%;
+    top :7%;
+    
+  }
+
+
+  .material-icons{
+
+    color: #ffffff;
+  
+    display: inline-block;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+
+    position:absolute;
+    left:3%;
+    top: 6%;
+    list-style: none;
+
+
+
+  }
+
+
+  
+  
+
+  @media (max-width: 1000px ) and (max-height: 1500px){
+    .prof2 {
+      font-size: 13px; 
+      position:absolute;
+      left:9%;
+      top: 3%;
+    }
+
+    .material-icons{
+
+      font-size: 17px; 
+      
+      top: 2.5%;
+
+    }
+  
+  }
+
+.person{
+  list-style: none;
+
+}
+
+
+@media (max-width: 400px) {
+
+.H22{
+  font-size: 12px;
+}
+}

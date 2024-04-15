@@ -1,0 +1,195 @@
+/* src/components/JobList.css */
+
+.job-list-container {
+    background-color: #151C48;
+    border-radius: 10px;
+    margin-top: 3%;
+    margin-right: 4%;
+    margin-left: 4%;
+  }
+  
+  .job-list {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .job-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2%;
+    margin-bottom: 2%;
+   
+  }
+  
+  .job-header {
+    display: flex;
+    padding-top:1%;    
+  }
+  
+  .company-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5%;
+  }
+  
+  .company-details {
+    flex: 1;
+  }
+  
+  h3 {
+    font-size: 16px;
+    margin-right: 10%;
+
+    color: #333;
+  }
+  
+  h1 {
+    font-size: 20px;
+    margin-right: 10%;
+
+    color: #333;
+  }
+ 
+
+  .butt {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 15px; /* Adjust font size to change button text size */
+    margin-left: 50%;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+  
+
+
+
+  /* Styling for the search container */
+.search-container {
+  text-align: center; /* Center the input and button */
+  
+}
+
+
+.search-input {
+  margin-top: 3%;
+  padding: 1%; 
+  width: 90%; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  font-size: 16px; 
+}
+
+
+
+
+
+.apply{  
+
+
+  /*     View More || View Less Button    */
+
+  width: 12%;
+  height: 50px;
+  cursor: pointer;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-size: 15px; 
+  font-weight: bold;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+
+
+@media (max-width: 900px) {
+  .apply {
+  width: 20%;
+  font-size: 12px; 
+
+} 
+
+h3 {
+  font-size: 14px;
+
+}
+
+h1 {
+
+  font-size: 15px;
+  margin-top: 10px;
+  margin-right: 10%;
+
+  margin-bottom: 20px;
+}
+
+  
+}
+
+
+
+.applybutton{
+
+
+  width: 10%;
+  height: 50px;
+  cursor: pointer;
+  color:black ;
+  font-size: 15px; 
+  font-weight: bold;
+  background-color: #F0B555;
+  margin-left: 89%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+
+
+@media (max-width: 700px) {
+  .applybutton {
+font-size: 15px;
+width: 20%;
+margin-left: 79%;
+
+} 
+
+
+}
+
+.jobdes{
+
+  margin-top: 5%;
+  width: 70%;
+}
+
+.search{
+
+  margin-top: 100px;
+  padding: 10px; 
+  width: 1200px; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  color:grey ;
+}
+
+
+.user-details{
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.NoAppl{
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
