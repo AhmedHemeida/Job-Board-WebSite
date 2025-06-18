@@ -8,6 +8,7 @@ A full-stack Job Board web application where users can register, post jobs, appl
 - 👤 Role-based Access (Admin, Employer, Job Seeker)
 - 📝 Post, View, and Apply for Jobs
 - 📁 Resume Uploads
+- 📧 Email Notifications for Successful Applications
 - 🔍 Filter and Search Jobs
 - 🛠️ Admin Dashboard
 - 📊 Application Management
