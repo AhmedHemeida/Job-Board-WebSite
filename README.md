@@ -26,6 +26,6 @@ A full-stack Job Board web application where users can register, post jobs, appl
 ## 📁 Project link video 
 ## 🎥 Demo
 
-[Watch Video Demo on linkedin](https://www.youtube.com/watch?v=your_video_id)
+[Watch Video Demo on linkedin]([https://www.youtube.com/watch?v=your_video_id](https://www.linkedin.com/posts/ahmed-hemeida-568235225_codsoft-webdevelopment-internship-activity-7116919088110534656-jcL5?utm_source=share&utm_medium=member_desktop&rcm=ACoAADhz_-ABCDaDA_To-dsvxte-29GD5QFS7dk))
 
 
