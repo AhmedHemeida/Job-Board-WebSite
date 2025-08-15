@@ -1,6 +1,5 @@
 const express = require ("express") ;
 const router = express.Router() ;
-const regValidator =require("../middlewares/CustomerMwRegistValid") ;
 const User =require("../models/UsersModel") ;
 const Token = require("../controllers/Jwt")
 const bcrypt = require ("bcrypt") ;
@@ -19,6 +18,8 @@ router.post("/signup"  , async(req,res)=> {
   } 
 
       let salt = await bcrypt.genSalt(10) ;
+         console.log("pasword" , req.body.password) ; 
+
      let hashedPassword = await bcrypt.hash(req.body.password , salt) ;
      usr = new User({
 
@@ -29,7 +30,6 @@ router.post("/signup"  , async(req,res)=> {
         IsEmployer : req.body.IsEmployer
 
     }) ;
-   
       await usr.save() ;
 
       res.status(201).json({msg:"User Regist Success.."}) ;
@@ -38,7 +38,8 @@ router.post("/signup"  , async(req,res)=> {
 
     }
     catch (err){
-    res.status(500).json({msg:sent});
+    res.status(500).json(err);
+    console.log(err) ;
     }
 }) ;
 
@@ -59,7 +60,14 @@ router.post("/signin" , async(req,res)=>{
         
 
            const token = Token.generateToken(usr) ;
-           res.json({msg:"Loged in sucsessfully..",IsEmployer:usr.IsEmployer,username :usr.username ,token:token });
+           res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, 
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000 
+            });
+                          
+        res.json({msg:"Loged in sucsessfully..",IsEmployer:usr.IsEmployer,username :usr.username , ID : usr._id  });
            
 
        

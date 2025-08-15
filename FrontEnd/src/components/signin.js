@@ -5,7 +5,7 @@ import API from '../APis/Api'
 import { useNavigate  } from 'react-router-dom';
 
 
-function Addjob() {
+function Login() {
 
 
 
@@ -25,8 +25,8 @@ function Addjob() {
     .Login(data)
     .then( (response) => {
    
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('username', response.data.username);
+     localStorage.setItem('username', response.data.username);
+    localStorage.setItem('id', response.data.ID); 
 
 
 
@@ -125,4 +125,4 @@ function Addjob() {
   );
 }
 
-export default Addjob;
+export default Login;

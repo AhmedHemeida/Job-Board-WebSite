@@ -1,31 +1,28 @@
 import axios from 'axios';
 
+//axios.defaults.withCredentials = true;
 
-let base="https://job-9swc.onrender.com/api";
+let base="http://localhost:5000/api";
 
 
-const token = localStorage.getItem('token');
+const ID = localStorage.getItem('ID');
 
-const headers = {
-    Authorization: `${token}`,
-  };
+
 
 let Login    = (data)=> axios.post( `${base}/signin`,data ) ;
 let Register = (data)=> axios.post( `${base}/signup`,data ) ;
 
 
 let Applications = ()=> axios.get(`${base}/signin` , {
-    headers:headers 
+    
 }) ;
 
 
 let AddJob =  (data)=> axios.post( `${base}/post-job`,data , {
-    headers:headers
 }) ;
 
 
 let ApplyJob =  (data)=> axios.post( `${base}/apply`,data , {
-    headers:headers ,
     
 }) ;
 

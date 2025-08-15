@@ -11,24 +11,19 @@ import axios from 'axios';
 const Applications = () => {
 
 
- 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
-
-
-const token = localStorage.getItem('token');
-
+  const id = urlParams.get('id');
 
 
   const [Job, setJob] = useState([]); 
 
   useEffect(() => {
-    const headers = {
-      Authorization: `${token}`,
-    };
+  
 
     axios
-      .get("https://job-9swc.onrender.com/api/get-applications", {
-        headers: headers,
+      .get(`http://localhost:5000/api/get-applications/${id}`, {
       })
       .then((response) => {
         const jobss = response.data;
@@ -69,13 +64,13 @@ const token = localStorage.getItem('token');
 
           <div className="job-card" key={index}>
             <div className="job-header">
-              <img src={job.jobId.CompanyPhoto} className="company-logo" alt={`Logo for ${job.jobId.nameOfCompany}`} />
+              <img src={job.CompanyPhoto} className="company-logo" alt={`Logo for ${job.nameOfCompany}`} />
               <div className="company-details">
-                <h3>{job.jobId.nameOfCompany}</h3>
-                <h1>{job.jobId.nameOfJob}</h1>
+                <h3>{job.nameOfCompany}</h3>
+                <h1>{job.nameOfJob}</h1>
 
 
-                <p>{job.jobId.Location}</p>
+                <p>{job.Location}</p>
               </div>
               <button className="apply" onClick={() => toggleAccordion(index)}>
                 {activeIndex === index ? 'View Less' : 'View more'}
@@ -84,7 +79,7 @@ const token = localStorage.getItem('token');
             {activeIndex === index && (
               <div className="job-details">
                 {/* Add the additional job details here */}
-                <p>{job.jobId.Disc}</p>
+                <p>{job.Disc}</p>
                 {/* Add more details as needed */}
               </div>
             )}

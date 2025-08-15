@@ -9,7 +9,9 @@ const apply = new mongoose.Schema({
       type :ObjectId ,
       ref  : 'job' ,
 
-    } ,
+    } , 
+
+    IdOfCompany:String ,
 
      name: {
 

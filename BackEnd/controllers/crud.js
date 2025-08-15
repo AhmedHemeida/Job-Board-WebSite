@@ -1,110 +1,82 @@
+const Job = require("../models/jobMode");
+const Applic = require("../models/ApplyForJob");
+const Users = require("../models/UsersModel");
+const jwt = require("jsonwebtoken");
+const Secret = process.env.JWT_SECRET;
 
-const Job = require("../models/jobMode") ;
-const Applic = require("../models/ApplyForJob") ;
-const Users= require("../models/UsersModel") ;
-const jwt =require('jsonwebtoken') ;
-const Secret=process.env.JWT_SECRET
+const GetMyPostedJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find(
+      { IdOfCompany: req.id },
+      { CompanyPhoto: 1, nameOfJob: 1, Disc: 1, Location: 1 }
+    );
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).send("error");
+    console.log(error);
+  }
+};
 
 
 
-const GetMyPostedJobs = async (req,res)=>{
 
-    try{
+const GetAllJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({}, { Applicants: 0, IdOfCompany: 0, __v: 0 });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).send("error");
+    console.log(error);
+  }
+};
 
 
-        const token = req.header("Authorization") ;
-        let data =jwt.verify(token,Secret) ;
 
-        if(data) {
+const GetApplicants = async (req, res) => {
+  try {
 
-        const jobs = await Job.find({IdOfCompany:data.id}, { CompanyPhoto:1 ,nameOfJob:1 ,Disc :1 ,Location:1}) ;
-        res.status(200).json(jobs) ;  }
+    const job = await Job.findById(req.params.id)
+       .populate({
+        path: "Applicants.applicantID",
+        select: "photo JobTitle" 
+      });
+    if (!job) {
+      return res.status(404).json({ msg: "Job not found" });
     }
-    catch(error){
-        res.status(500).send("error") ;
-        console.log(error) ;
-    }
 
-}
+    if(req.id !== job.IdOfCompany)
+        return res
+        .status(403)
+        .json({ msg: "Not authorized to view applications" });
 
-const GetAllJobs = async (req,res)=>{
-
-    try{
-
-        const jobs = await Job.find({},{Applicants:0 ,IdOfCompany:0  ,__v:0 }) ;
-        res.status(200).json(jobs) ;
-    }
-    catch(error){
-        res.status(500).send("error") ;
-        console.log(error) ;
-    }
-
-}
+    res.json(job.Applicants);
+  } catch (error) {
+    res.status(500).send("error ):");
+    console.error(error);
+  }
+};
 
 
-const GetApplicants = async (req,res)=>{
 
-    try{
 
-        const JobId=req.params.id ;
-        const token = req.header("Authorization") ;
 
-        let data =jwt.verify(token,Secret) ;
+const Applications = async (req, res) => {
+  try {
+    if (req.id !== req.params.id)
+      return res
+        .status(403)
+        .json({ msg: "Not authorized to view applications" });
+
+    const AppliedJobs = await Job.find(
+      { "Applicants.applicantID": req.id } ,  { nameOfJob: 1, Disc: 1, Location: 1, nameOfCompany: 1, CompanyPhoto: 1, Applicants: 1 }
        
+    )
 
-        if(data) {
+    res.status(200).json(AppliedJobs);
+  } catch (error) {
+    res.status(500).send("error");
+    console.log(error);
+  }
+};
 
-        const job = await Applic.find({jobId:JobId})
-        
-    
-            if(job){
-         return res.status(200).json(job) ;  }
-
-
-        res.status(404).json("no applicants");
-
-
-    
-    }
-
-}
-
-    catch(error){
-        res.status(500).send("error ):") ;
-        console.log(error) ;
-    }
-
-}
-
-
-
-const Applications = async (req,res)=>{
-
-    try{
-
-        const token = req.header("Authorization") ;
-        let data =jwt.verify(token,Secret) ;
-
-        if(data){
-
-        const AppliedJobs = await Applic.find({applicantId:data.id},{jobId:1 ,_id:0}).populate({
-
-            path: 'jobId',
-            select: 'nameOfJob Disc Location nameOfCompany CompanyPhoto',
-        }) ;
-        
-        res.status(200).json(AppliedJobs) ; }
-    }
-    catch(error){
-        res.status(500).send("error") ;
-        console.log(error) ;
-    }
-
-}
-
-
-
-
-
-
-module.exports ={GetAllJobs , GetMyPostedJobs, Applications , GetApplicants } ;
+module.exports = { GetAllJobs, GetMyPostedJobs, Applications, GetApplicants };

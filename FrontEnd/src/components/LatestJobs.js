@@ -1,119 +1,91 @@
 // src/components/JobList.js
 
-import './JobList.css'; // Import the CSS file for job list styles
-import logo from '../photos/orange.jpg';
-import CanNav from '../components/CanNav' ;
-import React, { useState ,useEffect } from 'react';
+import './JobList.css';
+import CanNav from '../components/CanNav';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Icon from '@mui/material/Icon';
 import axios from 'axios';
-import {JobCards}  from '../functions/jobCardsFun'
+import { JobCards } from '../functions/jobCardsFun';
+import { io } from 'socket.io-client';
 
 function searchByNameOfJob(array, searchTerm) {
   searchTerm = searchTerm.toLowerCase();
-
-  return array.filter((item) => {
-    const nameOfJob = item.nameOfJob.toLowerCase();
-    return nameOfJob.includes(searchTerm);
-  });
+  return array.filter((item) => item.nameOfJob.toLowerCase().includes(searchTerm));
 }
 
 const LatestJobs = () => {
+  const navigate = useNavigate();
 
-  
-  const token = localStorage.getItem('token');
-
-    const navigate = useNavigate(); 
-
-
-  const [Job, setJob] = useState([]); 
+  const [Job, setJob] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
-
-
-
-
-
+  const socketRef = useRef(null); // ✅ socket ref
 
   useEffect(() => {
-    const headers = {
-      Authorization: `${token}`,
-    };
 
     axios
-      .get("https://job-9swc.onrender.com/api/get-alljobs", {
-        headers: headers,
-      })
+      .get("http://localhost:5000/api/get-alljobs")
       .then((response) => {
-        const jobss = response.data;
-        setJob(jobss);
+        setJob(response.data);
+            console.log("jobb ahoom",Job.nameOfCompany) ;
+
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []); 
 
+    // ✅ 2. setup socket once
+    socketRef.current = io("http://localhost:5000", {
+      transports: ["websocket"],
+    });
 
+    socketRef.current.on("connect", () => {
+      console.log("✅ Socket connected");
+    });
 
+    socketRef.current.on("new-job", (newJob) => {
+      console.log("📢 Received new job:", newJob);
+        setJob((prevJobs) => [...prevJobs, newJob]);
+    });
 
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
 
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
 
-        const toggleAccordion = (index) => {
-          if (activeIndex === index) {
-            setActiveIndex(null);
-          } else {
-            setActiveIndex(index);
-          }
-        };
-
-
-        const handleInputChange = (event) => {
-          const term = event.target.value;
-          setSearchTerm(term);
-      
-          const results = searchByNameOfJob(Job, term);
-          setSearchResults(results);
-        };
-
-
+  const handleInputChange = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    setSearchResults(searchByNameOfJob(Job, term));
+  };
 
   return (
-
-
-
     <>
-
-    <CanNav/>
-
-    <div className="search-container">
-   
-    <input
-      type="text"
-      placeholder="Search Jobs..."
-      className="search-input"
-      value={searchTerm}
-      onChange={handleInputChange}
-     
-    />
-
-
-   
-  </div>
-
-
-  <div className="job-list-container">
-      <div className="job-list">
-     
-
-      {searchTerm ? (
-        JobCards(searchResults, activeIndex, toggleAccordion)
-          ) : (
-            JobCards(Job.slice().reverse(), activeIndex, toggleAccordion)
-          )}
+      <CanNav />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search Jobs..."
+          className="search-input"
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
       </div>
-    </div>
-  
+
+      <div className="job-list-container">
+        <div className="job-list">
+          {searchTerm
+            ? JobCards(searchResults, activeIndex, toggleAccordion)
+            : JobCards(Job.slice().reverse(), activeIndex, toggleAccordion)
+
+}
+        </div>
+      </div>
     </>
   );
 };

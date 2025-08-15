@@ -8,7 +8,7 @@ function Nav() {
   const navigate = useNavigate();
 
   const username = localStorage.getItem('username');
-
+  
   const goHome = () => {
     navigate('/');
   };

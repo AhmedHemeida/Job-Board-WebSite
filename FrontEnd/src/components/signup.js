@@ -4,7 +4,7 @@ import AuthNav from '../components/AuthNav'
 import API from '../APis/Api'
 import { useNavigate  } from 'react-router-dom';
 
-function Addjob() {
+function SignUp() {
 
   let navigate = useNavigate();
 
@@ -164,4 +164,4 @@ function Addjob() {
     );
   }
   
-  export default Addjob;
+  export default SignUp;

@@ -8,6 +8,7 @@ function Nav() {
 
   const navigate = useNavigate(); 
   const username = localStorage.getItem('username');
+  const ID = localStorage.getItem('id');
 
 
 
@@ -18,8 +19,8 @@ function Nav() {
   
 
 
-  const applications = () => {
-    navigate('/applications');
+  const applications = (id,job) => {
+    navigate(`/applications?id=${ID}`);
   };
 
   const FindJob = () => {

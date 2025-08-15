@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
+axios.defaults.withCredentials = true;
 
 const Applications = () => {
 
@@ -14,20 +15,15 @@ const Applications = () => {
   const navigate = useNavigate();
 
 
-  const token = localStorage.getItem('token');
-
-
 
   const [Job, setJob] = useState([]); 
 
   useEffect(() => {
-    const headers = {
-      Authorization: `${token}`,
-    };
+   
 
     axios
-      .get("https://job-9swc.onrender.com/api/get-postedjobs", {
-        headers: headers,
+      .get("http://localhost:5000/api/get-postedjobs", {
+        
       })
       .then((response) => {
         const jobss = response.data;
@@ -70,7 +66,6 @@ const Applications = () => {
             <div className="job-header">
             <img src={`${job.CompanyPhoto}`} className="company-logo" alt={`Logo for ${job.nameOfCompany}`} />
               <div className="company-details">
-              <h2>{job.nameOfCompany}</h2>
                 <h3>{job.nameOfJob}</h3>
                 <p>{job.Location}</p>
               </div>
