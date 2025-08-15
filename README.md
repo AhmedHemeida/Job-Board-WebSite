@@ -5,7 +5,7 @@ A full-stack Job Board web application where users can register, post jobs, appl
 ## 🚀 Features
 
 - ⚡ Real-time Job Posting
-- 🔐 User Authentication (JWT-based)
+- 🔐 User Authentication (JWT-based with HTTP-only Cookies)
 - 👤 Role-based Access (Admin, Employer, Job Seeker)
 - 📝 Post, View, and Apply for Jobs
 - 📁 Resume Uploads
